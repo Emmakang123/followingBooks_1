@@ -17,8 +17,7 @@ public class PhoneBookTest { // main class
         //3. check person has this phone number
         // person.addPhoneNumber(new PhoneNumber("010 1234 5678"));
         // System.out.println(person.hasPhoneNumber(new PhoneNumber("01012345678")));// useing same number but different type
-
-    
+        
         
         
     }
@@ -89,6 +88,14 @@ class PhoneBook{ // phonebook class - list of phone number
     public String toString() {
         return "PhoneBookClass{ people = " + people+"}";
     }
+
+    public Person search(PhoneNumber number){
+        return people.stream()
+                .filter(p->p.hasPhoneNumber(number))
+                .findFirst()
+                .orElse(null);
+    }
+
     public static void main(String[] args) {
 
             //4. make lots of person obj
@@ -101,9 +108,11 @@ class PhoneBook{ // phonebook class - list of phone number
     
             PhoneBook phoneBook = new PhoneBook();
             phoneBook.addPerson(person1);
-            phoneBook.addPerson(person1);
-            phoneBook.addPerson(person1);
-            System.out.println(phoneBook);
+            phoneBook.addPerson(person2);
+            phoneBook.addPerson(person3);
+            System.out.println(phoneBook.search(new PhoneNumber("01012345678")));        
+            System.out.println(phoneBook.search(new PhoneNumber("01023456743")));        
+            System.out.println(phoneBook.search(new PhoneNumber("01000000000")));        
     }
 
 }
